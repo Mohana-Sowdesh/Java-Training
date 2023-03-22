@@ -3,7 +3,7 @@ package creationalpattern;
 public class BuilderPattern {
 
 	public static void main(String[] args) {
-		Car car = new Car.BuildCar()
+		Car car = new Car.CarBuilder()
 					.setSteering(new Steering())
 					.setBrake(new Brake())
 					.setGear(new Gear())
@@ -27,28 +27,28 @@ class Car {
 		this.engine = engine;
 	}
 
-	static class BuildCar { //CarBuilder
+	static class CarBuilder { 
 		Steering steering;
 		Brake brake;
 		Gear gear;
 		Engine engine;
 
-		public BuildCar setSteering(Steering steering) {
+		public CarBuilder setSteering(Steering steering) {
 			this.steering = steering;
 			return this;
 		}
 
-		public BuildCar setBrake(Brake brake) {
+		public CarBuilder setBrake(Brake brake) {
 			this.brake = brake;
 			return this;
 		}
 
-		public BuildCar setGear(Gear gear) {
+		public CarBuilder setGear(Gear gear) {
 			this.gear = gear;
 			return this;
 		}
 
-		public BuildCar setEngine(Engine engine) {
+		public CarBuilder setEngine(Engine engine) {
 			this.engine = engine;
 			return this;
 		}

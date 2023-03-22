@@ -9,8 +9,14 @@ public class VisitorPattern {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please enter the mode in which washing machine should be operated: ");
 		String modeOfOperation = scanner.next();
-		Mode mode = (Mode) Class.forName(modeOfOperation).newInstance();
-		washingMachine.modeOfOperation(mode); //handle exception
+		Mode mode;
+		try {
+			mode = (Mode) Class.forName(modeOfOperation).newInstance();
+			washingMachine.setMode(mode); 
+		}
+		catch(Exception exception) {
+			System.out.println("Enter a valid mode");
+		}
 	}
 
 }
@@ -20,7 +26,7 @@ class WashingMachine {
 		System.out.println("Washing Machine started...");
 	}
 
-	public void modeOfOperation(Mode mode) { //setMode
+	public void setMode(Mode mode) {
 		mode.execute();
 	}
 }

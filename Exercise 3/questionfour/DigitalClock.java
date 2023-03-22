@@ -52,4 +52,7 @@ class Time {
 		}
 	}
 }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

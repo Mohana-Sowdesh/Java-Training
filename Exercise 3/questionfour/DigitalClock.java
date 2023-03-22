@@ -14,9 +14,9 @@ public class DigitalClock {
 		int second = dateTime.getSecond();
 		
 		Time timeObj = new Time();
-		
-		ExecutorService threadObject = Executors.newFixedThreadPool(1);
-		threadObject.execute(() -> {
+
+		ExecutorService executorService = Executors.newFixedThreadPool(1);
+		executorService.execute(() -> {
 			timeObj.incrementTime(hour, minute, second);
 		});
 	}
@@ -27,30 +27,32 @@ class Time {
 		while(true) {
 			second++;
 			
-			if(second==60) {
+			if(second == 60) {
 				second = 0; 
 				minute++;
 			}
 			
-			if(minute==60) {
+			if(minute == 60) {
 				minute = 0;
 				hour++;
 			}
 			
-			if(hour>12) {
-				hour = hour-12;
+			if(hour > 12) {
+				hour = hour - 12;
 			}
 			
 			try {
 				wait(1000);
 			}
-			catch(Exception errMsg) {
-				errMsg.printStackTrace();
+			catch(Exception exception) {
+				exception.printStackTrace();
 			}
 			
-			System.out.println(hour+":"+minute+":"+second);
+			System.out.println(hour + ":" + minute + ":" + second);
 		}
-		
 	}
 }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

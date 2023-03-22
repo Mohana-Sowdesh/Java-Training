@@ -4,56 +4,54 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ProducerConsumerProblem {
-	
+
 	public static void main(String[] args) {
-		int product = 0;
-		Inventory producer = new Inventory();
-		
-		ExecutorService threadObject = Executors.newFixedThreadPool(2);
-		
-		threadObject.execute(() -> {
-			for(int j=0; j<3; j++) {
-				producer.produceProduct();
+		Inventory inventory = new Inventory();
+
+		ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+		executorService.execute(() -> {
+			for (int j = 0; j < 3; j++) {
+				inventory.produceProduct();
 			}
 		});
-		
-		threadObject.execute(() -> {
-			for(int j=0; j<3; j++) {
-				producer.consumeProduct();
+
+		executorService.execute(() -> {
+			for (int j = 0; j < 3; j++) {
+				inventory.consumeProduct();
 			}
-		});	
-		threadObject.shutdown();
+		});
+		executorService.shutdown();
 	}
 
 }
 
 class Inventory {
-	int product = 0;
+	int productState = 0;
+
 	synchronized public void produceProduct() {
-		if(product==1) {
+		if (productState == 1) {
 			try {
 				wait();
-			}
-			catch(Exception e) {
-				e.printStackTrace();
+			} catch (Exception exception) {
+				exception.printStackTrace();
 			}
 		}
 		System.out.println("Product produced");
-		product = 1;
+		productState = 1;
 		notify();
 	}
 
 	synchronized public void consumeProduct() {
-		if(product==0) {
+		if (productState == 0) {
 			try {
 				wait();
-			}
-			catch(Exception e) {
-				e.printStackTrace();
+			} catch (Exception exception) {
+				exception.printStackTrace();
 			}
 		}
 		System.out.println("Product consumed");
-		product = 0;
+		productState = 0;
 		notify();
 	}
 }

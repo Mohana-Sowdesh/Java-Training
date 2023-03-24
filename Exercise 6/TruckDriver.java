@@ -32,8 +32,10 @@ class JourneyDaysCalculator {
 	public void calculateTime(int speed, int distance, LocalDate date, LocalTime time) {
 		int workingHrsPerDay = 8;
 		int distanceTravelledToday = 0;
-		int minutes = time.getMinute();
 		int timeNeeded = distance / speed;
+		double journeyTime = ((double)distance / speed);
+		String journeyArray[] = String.valueOf(journeyTime).split("\\.");
+		int journeyMinutes = (Integer.parseInt(journeyArray[1]) * 60) / 100;
 
 		int drivingHrsPresentToday = 24 - time.getHour();
 		if (drivingHrsPresentToday < workingHrsPerDay) {
@@ -43,6 +45,7 @@ class JourneyDaysCalculator {
 			distance -= distanceTravelledToday;
 			date = date.plusDays(1);
 		}
+
 
 		while (timeNeeded > 0) {
 			time = time.MIDNIGHT;
@@ -66,12 +69,12 @@ class JourneyDaysCalculator {
 				date = date.plusDays(1);
 			}
 
-			if (distance > 0 || timeNeeded > 0) {
+			if (distance > 0 && timeNeeded > 0) {
 				date = date.plusDays(1);
 			}
 		}
 
-		time = time.plusMinutes(minutes);
+		time = time.plusMinutes(journeyMinutes);
 		System.out.println("The driver will reach on " + date + " " + time);
 	}
 }

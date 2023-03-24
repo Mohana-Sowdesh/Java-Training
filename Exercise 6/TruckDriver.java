@@ -3,6 +3,7 @@ package truckdriver;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class TruckDriver {
@@ -15,27 +16,24 @@ public class TruckDriver {
 
 		System.out.println("Enter the distance to be travelled: ");
 		int distance = scanner.nextInt();
-
-		System.out.println("Enter start date of journey: ");
-		LocalDate journeyStartDate = LocalDate.parse(scanner.next());
-
-		System.out.println("Enter start time of journey: ");
-		LocalTime journeyStartTime = LocalTime.parse(scanner.next());
-
+		
 		JourneyDaysCalculator journeyDaysCalculator = new JourneyDaysCalculator();
-		journeyDaysCalculator.calculateTime(speed, distance, journeyStartDate, journeyStartTime);
+		journeyDaysCalculator.calculateTime(speed, distance);
 	}
 
 }
 
 class JourneyDaysCalculator {
-	public void calculateTime(int speed, int distance, LocalDate date, LocalTime time) {
+	public void calculateTime(int speed, int distance) {
+		
 		int workingHrsPerDay = 8;
 		int distanceTravelledToday = 0;
 		int timeNeeded = distance / speed;
 		double journeyTime = ((double)distance / speed);
 		String journeyArray[] = String.valueOf(journeyTime).split("\\.");
 		int journeyMinutes = (Integer.parseInt(journeyArray[1]) * 60) / 100;
+		LocalTime time =  LocalTime.now();
+		LocalDate date = LocalDate.now();
 
 		int drivingHrsPresentToday = 24 - time.getHour();
 		if (drivingHrsPresentToday < workingHrsPerDay) {

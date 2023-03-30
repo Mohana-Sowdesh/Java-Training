@@ -1,3 +1,4 @@
+
 package questioneight;
 
 import java.io.BufferedReader;
@@ -16,7 +17,7 @@ public class LineByLineCopier {
 			
 			while((sentence = bufferedReader.readLine())!=null) {
 				stringBuffer.append(sentence);
-				stringBuffer.append("\t");
+				stringBuffer.append("\n");
 			}
 			System.out.println(stringBuffer.toString());
 			fileReader.close();

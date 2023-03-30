@@ -15,7 +15,7 @@ public class FileViewer {
 				System.out.print((char)i);
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 

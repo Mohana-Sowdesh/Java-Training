@@ -7,12 +7,12 @@ import java.io.FileOutputStream;
 public class ImageReader {
 
 	public static void main(String[] args) {
-		File sourcePath = new File("/Users/mohanasowdesh/eclipse-workspace/Exercise7/tree_image.jpeg");
-		File destinationPath =new File("/Users/mohanasowdesh/eclipse-workspace/Exercise7/tree.jpeg");
+		File sourceFile = new File("/Users/mohanasowdesh/eclipse-workspace/Exercise7/tree_image.jpeg");
+		File destinationFile =new File("/Users/mohanasowdesh/eclipse-workspace/Exercise7/tree.jpeg");
 		
 		try {
-			FileInputStream inputStream = new FileInputStream(sourcePath);
-			FileOutputStream outputStream = new FileOutputStream(destinationPath);
+			FileInputStream inputStream = new FileInputStream(sourceFile);
+			FileOutputStream outputStream = new FileOutputStream(destinationFile);
 			
 			byte byteArray[] = new byte[32];
 			
@@ -23,8 +23,7 @@ public class ImageReader {
 		}
 		catch(Exception exception) {
 			exception.printStackTrace();
-		}
 		System.out.println("Image copied successfully!!");
-		
+		}
 	}
 }

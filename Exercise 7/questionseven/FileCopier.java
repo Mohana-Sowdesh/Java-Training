@@ -7,9 +7,8 @@ public class FileCopier {
 
 	public static void main(String[] args) {
 
-		try {
-			FileReader fileReader = new FileReader("fileSource.txt");
-			FileWriter fileWriter = new FileWriter("fileDestination.txt");
+		try(FileReader fileReader = new FileReader("fileSource.txt");
+			FileWriter fileWriter = new FileWriter("fileDestination.txt");){
 
 			char charArray[] = new char[64];
 			int i = 0;
@@ -18,9 +17,6 @@ public class FileCopier {
 				System.out.println(copiedData);
 				fileWriter.write(copiedData);
 			}
-			
-			fileWriter.close();
-			fileReader.close();
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
